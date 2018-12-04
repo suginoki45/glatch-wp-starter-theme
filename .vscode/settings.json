@@ -1,0 +1,30 @@
+{
+	// リポジトリ内に変更が多い場合は警告を無視
+	"git.ignoreLimitWarning": true,
+	// phpcsの保存時整形を動作させる為に、[php]のeditor.formatOnSaveをfalseに
+  "[html]": {
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[php]": {
+    "editor.formatOnSave": false,
+    "editor.tabSize": 4
+	},
+	// prettierとぶつかり合うのでデフォルトの整形は無効にする
+	"javascript.format.enable": false,
+	// prettierでeslintを使用できるようにする
+	"prettier.eslintIntegration": true,
+	// phpcsの設定
+	"phpcs.standard": "./phpcs.xml",
+	// phpcbfの設定
+  "phpcbf.standard": "WordPress",
+  "phpcbf.executablePath": "~/.composer/vendor/bin/phpcbf",
+	"phpcbf.onsave": true,
+	// ESLintの設定
+	"eslint.autoFixOnSave": true,
+}
