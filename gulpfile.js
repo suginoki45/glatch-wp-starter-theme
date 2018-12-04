@@ -105,7 +105,7 @@ gulp.task( 'scss', () => {
 		.pipe( gulpif( ! config.envProduction, sass({ outputStyle: 'expanded' }) ) )
 		.pipe(
 			autoprefixer({
-				browsers: [ 'last 2 version' ],
+				browsers: [ '.browserslistrc' ],
 				sourceComments: true,
 				cascade: false
 			})
