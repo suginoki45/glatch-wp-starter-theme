@@ -7,14 +7,6 @@ const notify = require( 'gulp-notify' );
 const rename = require( 'gulp-rename' );
 const gulpif = require( 'gulp-if' );
 const minimist = require( 'minimist' );
-const envSettings = {
-	string: 'env',
-	default: {
-		env: process.env.NODE_ENV || 'development'
-	}
-};
-const options = minimist( process.argv.slice( 2 ), envSettings );
-const production = 'production' === options.env;
 
 // image
 const imagemin = require( 'gulp-imagemin' );
@@ -55,8 +47,7 @@ const config = {
 	sassOptions: {
 		includePaths: [ 'node_modules/' ],
 		outputStyle: 'compressed'
-	},
-	envProduction: production
+	}
 };
 
 // Clean directory
@@ -100,9 +91,7 @@ gulp.task( 'scss', () => {
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
-		.pipe( gulpif( ! config.envProduction, sourcemaps.init() ) )
-		.pipe( gulpif( config.envProduction, sass({ outputStyle: 'compressed' }) ) )
-		.pipe( gulpif( ! config.envProduction, sass({ outputStyle: 'expanded' }) ) )
+		.pipe( sass( config.sassOptions ) )
 		.pipe(
 			autoprefixer({
 				browsers: [ '.browserslistrc' ],
@@ -110,7 +99,7 @@ gulp.task( 'scss', () => {
 				cascade: false
 			})
 		)
-		.pipe( gulpif( ! config.envProduction, sourcemaps.write( './maps/' ) ) )
+		.pipe( sourcemaps.write( './maps/' ) )
 		.pipe( gulp.dest( dir.dist.css ) );
 });
 
