@@ -27,6 +27,9 @@ const uglify = require( 'gulp-uglify' );
 // clean
 const del = require( 'del' );
 
+// server
+import browserSync from 'browser-sync';
+
 // directory settings
 const dir = {
 	src: {
@@ -61,6 +64,21 @@ gulp.task( 'clean', callback => {
 gulp.task( 'build', [ 'clean' ], callback => {
 	return runSequence([ 'scss', 'babel', 'img' ], callback );
 });
+
+/**
+ * Build Server
+ */
+const server = browserSync.create();
+export const serve = done => {
+	server.init({
+		proxy: 'http://localhost/your-folder-name'
+	});
+	done();
+};
+export const reload = done => {
+	server.reload();
+	done();
+};
 
 /**
  * Minify images
@@ -100,7 +118,8 @@ gulp.task( 'scss', () => {
 			})
 		)
 		.pipe( sourcemaps.write( './maps/' ) )
-		.pipe( gulp.dest( dir.dist.css ) );
+		.pipe( gulp.dest( dir.dist.css ) )
+		.pipe( server.stream() );
 });
 
 /**
@@ -136,6 +155,7 @@ gulp.task( 'watch', [ 'img', 'scss', 'babel' ], () => {
 	gulp.watch( `${dir.src.js}/**/*.js`, [ 'babel' ]);
 	gulp.watch( `${dir.src.css}/**/*.scss`, [ 'scss' ]);
 	gulp.watch( `${dir.src.img}/**/*.+(jpg|jpeg|png|gif)`, [ 'img' ]);
+	gulp.watch( '**/*.php', reload );
 });
 
 gulp.task( 'default', [ 'watch' ]);
