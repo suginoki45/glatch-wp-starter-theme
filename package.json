@@ -18,7 +18,7 @@
 		"del": "^3.0.0",
 		"eslint": "^5.4.0",
 		"eslint-config-wordpress": "^2.0.0",
-		"gulp": "^3.9.1",
+		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^6.0.0",
 		"gulp-babel": "^8.0.0",
 		"gulp-concat": "^2.6.1",
