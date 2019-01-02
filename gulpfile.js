@@ -155,4 +155,4 @@ gulp.task( 'watch', () => {
 	gulp.watch( '**/*.php', gulp.task( reload ) );
 });
 
-gulp.task( 'default', [ 'watch' ]);
+gulp.task( 'default', gulp.parallel( 'watch' ) );
