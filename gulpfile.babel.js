@@ -68,7 +68,7 @@ gulp.task( 'build', gulp.series( gulp.parallel( 'clean' ), 'scss', 'babel', 'img
 const server = browserSync.create();
 export const serve = done => {
 	server.init({
-		proxy: 'http://localhost/your-folder-name'
+		proxy: 'http://localhost/glatch-wp-starter-kit'
 	});
 	done();
 };
