@@ -148,11 +148,11 @@ gulp.task( 'uglify', () => {
 		.pipe( gulp.dest( dir.dist.js ) );
 });
 
-gulp.task( 'watch', [ 'img', 'scss', 'babel' ], () => {
-	gulp.watch( `${dir.src.js}/**/*.js`, [ 'babel' ]);
-	gulp.watch( `${dir.src.css}/**/*.scss`, [ 'scss' ]);
-	gulp.watch( `${dir.src.img}/**/*.+(jpg|jpeg|png|gif)`, [ 'img' ]);
-	gulp.watch( '**/*.php', reload );
+gulp.task( 'watch', () => {
+	gulp.watch( `${dir.src.js}/**/*.js`, gulp.task( 'babel' ) );
+	gulp.watch( `${dir.src.css}/**/*.scss`, gulp.task( 'scss' ) );
+	gulp.watch( `${dir.src.img}/**/*.+(jpg|jpeg|png|gif)`, gulp.task( 'img' ) );
+	gulp.watch( '**/*.php', gulp.task( reload ) );
 });
 
 gulp.task( 'default', [ 'watch' ]);
