@@ -1,7 +1,6 @@
 'use strict';
 
 const gulp = require( 'gulp' );
-const runSequence = require( 'run-sequence' );
 const plumber = require( 'gulp-plumber' );
 const notify = require( 'gulp-notify' );
 const rename = require( 'gulp-rename' );
@@ -61,9 +60,7 @@ gulp.task( 'clean', callback => {
 /**
  * Build defaultTasks
  */
-gulp.task( 'build', [ 'clean' ], callback => {
-	return runSequence([ 'scss', 'babel', 'img' ], callback );
-});
+gulp.task( 'build', gulp.series( gulp.parallel( 'clean' ), 'scss', 'babel', 'img' ) );
 
 /**
  * Build Server
