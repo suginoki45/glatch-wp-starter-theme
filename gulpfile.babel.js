@@ -6,6 +6,9 @@ import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import rename from 'gulp-rename';
 import gulpif from 'gulp-if';
+import info from './package.json';
+import replace from 'gulp-replace';
+import zip from 'gulp-zip';
 
 // image
 import imagemin from 'gulp-imagemin';
@@ -30,24 +33,48 @@ import browserSync from 'browser-sync';
 const PRODUCTION = yargs.argv.prod;
 
 // directory settings
-const dir = {
-	src: {
-		root: 'src',
-		css: 'src/scss',
-		js: 'src/js',
-		img: 'src/images'
+const paths = {
+	styles: {
+		src: 'src/scss/bundle.scss',
+		dest: 'dist/css'
 	},
-	dist: {
-		root: 'dist',
-		css: 'dist/scss',
-		js: 'dist/js',
-		img: 'dist/images'
+	images: {
+		src: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
+		dest: 'dist/images'
+	},
+	scrips: {
+		src: 'src/js/bundle.js',
+		dest: 'dist/js'
+	},
+	other: {
+		src: [ 'src/**/*', '!src/{images,js,scss}', '!src/{images,js,scss}/**/*' ],
+		dest: 'dist'
+	},
+	package: {
+		src: [
+			'**/*',
+			'!node_modules{,/**}',
+			'!bundled{,/**}',
+			'!src{,/**}',
+			'!.vscode{,/**}',
+			'!.babelrc',
+			'!.browserslistrc',
+			'!.eslintrc',
+			'!.stylelintrc',
+			'!.editorconfig',
+			'!.gitignore',
+			'!gulpfile.babel.js',
+			'!package.json',
+			'!package-lock.json',
+			'!phpcs.xml'
+		],
+		dest: 'packaged'
 	}
 };
 
 // Clean directory
 export const clean = () => {
-	return del([ dir.dist.root ]);
+	return del([ 'dist' ]);
 };
 
 /**
@@ -56,7 +83,7 @@ export const clean = () => {
 const server = browserSync.create();
 export const serve = done => {
 	server.init({
-		proxy: 'http://localhost/glatch-wp-starter-kit'
+		proxy: 'http://glatch-wp-starter-kit.test'
 	});
 	done();
 };
@@ -69,34 +96,30 @@ export const reload = done => {
  * Minify images
  */
 export const images = () => {
-	return src( `${dir.src.img}/*.{jpg,jpeg,png,svg,gif}` )
+	return src( paths.images.src )
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
 		.pipe( gulpif( PRODUCTION, imagemin() ) )
-		.pipe( dest( dir.dist.img ) );
+		.pipe( dest( paths.images.dest ) );
 };
 
 /**
  * Copy files
  */
 export const copy = () => {
-	return src([
-		'src/**/*',
-		'!src/{images,js,scss}',
-		'!src/{images,js,scss}/**/*'
-	])
+	return src( paths.other.src )
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
-		.pipe( dest( dir.dist.root ) );
+		.pipe( dest( paths.other.dest ) );
 };
 
 /**
  * Build CSS
  */
 export const styles = () => {
-	return src([ `${dir.src.css}/**/*/*.scss` ])
+	return src( paths.styles.src )
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
@@ -105,7 +128,7 @@ export const styles = () => {
 		.pipe( gulpif( PRODUCTION, postcss([ autoprefixer ]) ) )
 		.pipe( gulpif( PRODUCTION, cleanCss() ) )
 		.pipe( gulpif( ! PRODUCTION, sourcemaps.write() ) )
-		.pipe( dest( dir.dist.css ) )
+		.pipe( dest( paths.styles.dest ) )
 		.pipe( server.stream() );
 };
 
@@ -113,28 +136,40 @@ export const styles = () => {
  * Build JS
  */
 export const scripts = () => {
-	return src( `${dir.src.js}/**/*.js` )
+	return src( paths.scrips.src )
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
 		.pipe( babel() )
 		.pipe( gulpif( PRODUCTION, uglify() ) )
 		.pipe( rename({ suffix: '.min' }) )
-		.pipe( dest( dir.dist.js ) );
+		.pipe( dest( paths.scrips.dest ) );
+};
+
+/**
+ * Build zip
+ */
+export const compress = () => {
+	return src( paths.package.src )
+		.pipe(
+			gulpif(
+				file => 'zip' !== file.relative.split( '.' ).pop(),
+				replace( '_yourthemename', info.name )
+			)
+		)
+		.pipe( zip( `${info.name}.zip` ) )
+		.pipe( dest( 'bundled' ) );
 };
 
 /**
  * Watch for changes
  */
 export const watchForChanges = () => {
-	watch( dir.src.css, styles );
-	watch( `${dir.src.img}/*.{jpg,jpeg,png,svg,gif}`, series( images, reload ) );
-	watch(
-		[ 'src/**/*', '!src/{images,js,scss}', '!src/{images,js,scss}/**/*' ],
-		series( copy, reload )
-	);
-	watch( `${dir.src.js}/**/*.js`, series( scripts, reload ) );
+	watch( 'src/scss/**/*.scss', styles );
+	watch( 'src/js/**/*.js', series( scripts, reload ) );
 	watch( '**/*.php', reload );
+	watch( paths.images.src, series( images, reload ) );
+	watch( paths.other.src, series( copy, reload ) );
 };
 
 /**
@@ -147,4 +182,5 @@ export const dev = series(
 	watchForChanges
 );
 export const build = series( clean, parallel( styles, images, copy, scripts ) );
+export const bundle = series( build, compress );
 export default dev;
