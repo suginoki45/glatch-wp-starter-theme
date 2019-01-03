@@ -1,61 +1,54 @@
 'use strict';
 
-const gulp = require( 'gulp' );
-const plumber = require( 'gulp-plumber' );
-const notify = require( 'gulp-notify' );
-const rename = require( 'gulp-rename' );
-const gulpif = require( 'gulp-if' );
-const minimist = require( 'minimist' );
+import { src, dest, watch, series, parallel } from 'gulp';
+import yargs from 'yargs';
+import plumber from 'gulp-plumber';
+import notify from 'gulp-notify';
+import rename from 'gulp-rename';
+import gulpif from 'gulp-if';
 
 // image
-const imagemin = require( 'gulp-imagemin' );
-const imageminJpg = require( 'imagemin-jpeg-recompress' );
-const imageminPng = require( 'imagemin-pngquant' );
-const imageminGif = require( 'imagemin-gifsicle' );
+import imagemin from 'gulp-imagemin';
 
 // css
-const sass = require( 'gulp-sass' );
-const sourcemaps = require( 'gulp-sourcemaps' );
-const autoprefixer = require( 'gulp-autoprefixer' );
+import sass from 'gulp-sass';
+import postcss from 'gulp-postcss';
+import sourcemaps from 'gulp-sourcemaps';
+import autoprefixer from 'gulp-autoprefixer';
+import cleanCss from 'gulp-clean-css';
 
 // js
-const babel = require( 'gulp-babel' );
-const concat = require( 'gulp-concat' );
-const uglify = require( 'gulp-uglify' );
+import babel from 'gulp-babel';
+import uglify from 'gulp-uglify';
 
 // clean
-const del = require( 'del' );
+import del from 'del';
 
 // server
 import browserSync from 'browser-sync';
 
+const PRODUCTION = yargs.argv.prod;
+
 // directory settings
 const dir = {
 	src: {
-		css: 'src/css',
+		root: 'src',
+		css: 'src/scss',
 		js: 'src/js',
-		img: 'src/img',
-		svg: 'src/svg'
+		img: 'src/images'
 	},
 	dist: {
 		root: 'dist',
-		css: 'dist/css',
+		css: 'dist/scss',
 		js: 'dist/js',
-		img: 'dist/img'
-	}
-};
-
-const config = {
-	sassOptions: {
-		includePaths: [ 'node_modules/' ],
-		outputStyle: 'compressed'
+		img: 'dist/images'
 	}
 };
 
 // Clean directory
-gulp.task( 'clean', callback => {
-	return del([ `${dir.dist.root}` ], callback );
-});
+export const clean = () => {
+	return del([ dir.dist.root ]);
+};
 
 /**
  * Build Server
@@ -75,84 +68,83 @@ export const reload = done => {
 /**
  * Minify images
  */
-gulp.task( 'img', () => {
-	return gulp
-		.src( `${dir.src.img}/**/*.+(jpg|jpeg|png|gif)` )
+export const images = () => {
+	return src( `${dir.src.img}/*.{jpg,jpeg,png,svg,gif}` )
 		.pipe(
-			imagemin([
-				imageminPng(),
-				imageminJpg(),
-				imageminGif({
-					interlaced: false,
-					optimizationLevel: 3,
-					colors: 180
-				})
-			])
+			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
-		.pipe( gulp.dest( dir.dist.img ) );
-});
+		.pipe( gulpif( PRODUCTION, imagemin() ) )
+		.pipe( dest( dir.dist.img ) );
+};
+
+/**
+ * Copy files
+ */
+export const copy = () => {
+	return src([
+		'src/**/*',
+		'!src/{images,js,scss}',
+		'!src/{images,js,scss}/**/*'
+	])
+		.pipe(
+			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
+		)
+		.pipe( dest( dir.dist.root ) );
+};
 
 /**
  * Build CSS
  */
-gulp.task( 'scss', () => {
-	return gulp
-		.src([ `${dir.src.css}/**/*.scss` ])
+export const styles = () => {
+	return src([ `${dir.src.css}/**/*/*.scss` ])
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
-		.pipe( sass( config.sassOptions ) )
-		.pipe(
-			autoprefixer({
-				browsers: [ '.browserslistrc' ],
-				sourceComments: true,
-				cascade: false
-			})
-		)
-		.pipe( sourcemaps.write( './maps/' ) )
-		.pipe( gulp.dest( dir.dist.css ) )
+		.pipe( gulpif( ! PRODUCTION, sourcemaps.init() ) )
+		.pipe( sass().on( 'error', sass.logError ) )
+		.pipe( gulpif( PRODUCTION, postcss([ autoprefixer ]) ) )
+		.pipe( gulpif( PRODUCTION, cleanCss() ) )
+		.pipe( gulpif( ! PRODUCTION, sourcemaps.write() ) )
+		.pipe( dest( dir.dist.css ) )
 		.pipe( server.stream() );
-});
+};
 
 /**
  * Build JS
  */
-// Babel
-gulp.task( 'babel', () => {
-	return gulp
-		.src([ `${dir.src.js}/**/*.js` ])
+export const scripts = () => {
+	return src( `${dir.src.js}/**/*.js` )
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
 		.pipe( babel() )
-		.pipe( gulp.dest( dir.dist.js ) );
-});
-
-// Uglify
-gulp.task( 'uglify', () => {
-	return gulp
-		.src([ `${dir.src.js}/**/*.js` ])
-		.pipe(
-			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
-		)
-		.pipe( uglify() )
-		.on( 'error', function( e ) {
-			console.log( e );
-		})
+		.pipe( gulpif( PRODUCTION, uglify() ) )
 		.pipe( rename({ suffix: '.min' }) )
-		.pipe( gulp.dest( dir.dist.js ) );
-});
+		.pipe( dest( dir.dist.js ) );
+};
 
 /**
- * Build defaultTasks
+ * Watch for changes
  */
-gulp.task( 'build', gulp.series( 'clean', gulp.parallel( 'scss', 'babel', 'img' ) ) );
+export const watchForChanges = () => {
+	watch( dir.src.css, styles );
+	watch( `${dir.src.img}/*.{jpg,jpeg,png,svg,gif}`, series( images, reload ) );
+	watch(
+		[ 'src/**/*', '!src/{images,js,scss}', '!src/{images,js,scss}/**/*' ],
+		series( copy, reload )
+	);
+	watch( `${dir.src.js}/**/*.js`, series( scripts, reload ) );
+	watch( '**/*.php', reload );
+};
 
-gulp.task( 'watch', () => {
-	gulp.watch( `${dir.src.js}/**/*.js`, gulp.task( 'babel' ) );
-	gulp.watch( `${dir.src.css}/**/*.scss`, gulp.task( 'scss' ) );
-	gulp.watch( `${dir.src.img}/**/*.+(jpg|jpeg|png|gif)`, gulp.task( 'img' ) );
-	gulp.watch( '**/*.php', gulp.task( reload ) );
-});
-
-gulp.task( 'default', gulp.series( gulp.parallel( 'watch' ), serve ) );
+/**
+ * Config Task
+ */
+export const dev = series(
+	clean,
+	parallel( styles, images, copy, scripts ),
+	serve,
+	watchForChanges
+);
+export const build = series( clean, parallel( styles, images, copy, scripts ) );
+export default dev;

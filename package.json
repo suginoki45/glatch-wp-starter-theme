@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"start": "gulp"
+		"start": "gulp",
+		"build": "gulp build"
 	},
 	"repository": {
 		"type": "git",
@@ -23,22 +24,20 @@
 		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^6.0.0",
 		"gulp-babel": "^8.0.0",
-		"gulp-concat": "^2.6.1",
-		"gulp-group-css-media-queries": "^1.2.0",
+		"gulp-clean-css": "^4.0.0",
 		"gulp-if": "^2.0.2",
 		"gulp-imagemin": "^5.0.3",
 		"gulp-notify": "^3.2.0",
 		"gulp-plumber": "^1.2.0",
+		"gulp-postcss": "^8.0.0",
 		"gulp-rename": "^1.4.0",
 		"gulp-sass": "^4.0.1",
 		"gulp-sourcemaps": "^2.6.0",
 		"gulp-uglify": "^3.0.1",
-		"imagemin-gifsicle": "^6.0.1",
-		"imagemin-jpeg-recompress": "^6.0.0",
-		"imagemin-pngquant": "^6.0.0",
 		"stylelint": "^9.8.0",
 		"stylelint-config-recommended-scss": "^3.2.0",
 		"stylelint-config-wordpress": "^13.1.0",
-		"stylelint-scss": "^3.4.0"
+		"stylelint-scss": "^3.4.0",
+		"yargs": "^12.0.5"
 	}
 }
