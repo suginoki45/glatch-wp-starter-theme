@@ -58,11 +58,6 @@ gulp.task( 'clean', callback => {
 });
 
 /**
- * Build defaultTasks
- */
-gulp.task( 'build', gulp.series( gulp.parallel( 'clean' ), 'scss', 'babel', 'img' ) );
-
-/**
  * Build Server
  */
 const server = browserSync.create();
@@ -147,6 +142,11 @@ gulp.task( 'uglify', () => {
 		.pipe( rename({ suffix: '.min' }) )
 		.pipe( gulp.dest( dir.dist.js ) );
 });
+
+/**
+ * Build defaultTasks
+ */
+gulp.task( 'build', gulp.series( 'clean', gulp.parallel( 'scss', 'babel', 'img' ) ) );
 
 gulp.task( 'watch', () => {
 	gulp.watch( `${dir.src.js}/**/*.js`, gulp.task( 'babel' ) );
