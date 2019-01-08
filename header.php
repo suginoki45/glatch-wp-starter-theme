@@ -12,25 +12,13 @@
 <html <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone=no, email=no, address=no">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta property="og:title" content="">
-	<meta property="og:description" content="">
-	<meta property="og:url" content="">
-	<meta property="og:image" content="">
-	<meta property="og:site_name" content="">
-	<meta property="og:type" content="">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:creator" content="@">
-	<link rel="apple-touch-icon" href="">
-	<link rel="icon" href="">
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-	<div class="l-container p-header">
-		<?php get_template_part( 'tmp/site-branding' ); ?>
-	<!-- /header --></div>
+	<header class="fd-section p-header">
+		<div class="l-header">
+			<?php get_template_part( 'tmp/site-branding' ); ?>
+		</div>
+	</header>
+	<!-- /header -->
