@@ -2,9 +2,9 @@
 /**
  * The Header template.
  *
- * @package   glatch-wp-starter-kit
+ * @package   _yourthemename
  * @copyright Copyright (c) 2018 Glatch
- * @since     glatch-wp-starter-kit 1.0
+ * @since     _yourthemename 1.0
  */
 
 ?>
