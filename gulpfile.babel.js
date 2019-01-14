@@ -83,7 +83,7 @@ export const clean = () => {
 const server = browserSync.create();
 export const serve = done => {
 	server.init({
-		proxy: 'http://glatch-wp-starter-kit.test'
+		proxy: 'http://glatchwpstarter.local'
 	});
 	done();
 };
