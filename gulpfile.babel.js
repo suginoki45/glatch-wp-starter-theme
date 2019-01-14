@@ -19,6 +19,7 @@ import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'gulp-autoprefixer';
 import cleanCss from 'gulp-clean-css';
+import packageImporter from 'node-sass-package-importer';
 
 // js
 import babel from 'gulp-babel';
@@ -70,6 +71,12 @@ const paths = {
 		],
 		dest: 'packaged'
 	}
+};
+
+const sassOptions = {
+	importer: packageImporter({
+		extensions: [ '.scss', '.css' ]
+	})
 };
 
 // Clean directory
@@ -124,7 +131,7 @@ export const styles = () => {
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
 		.pipe( gulpif( ! PRODUCTION, sourcemaps.init() ) )
-		.pipe( sass().on( 'error', sass.logError ) )
+		.pipe( sass( sassOptions ).on( 'error', sass.logError ) )
 		.pipe( gulpif( PRODUCTION, postcss([ autoprefixer ]) ) )
 		.pipe( gulpif( PRODUCTION, cleanCss() ) )
 		.pipe( gulpif( ! PRODUCTION, sourcemaps.write() ) )

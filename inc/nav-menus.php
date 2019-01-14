@@ -9,6 +9,7 @@
 
 register_nav_menus(
 	array(
-		'global_navi' => __( 'Primary Navigation', '_yourthemename' ),
+		'global_navi' => __( 'Global Navigation', '_yourthemename' ),
+		'footer_navi' => __( 'Footer Navigation', '_yourthemename' ),
 	)
 );
