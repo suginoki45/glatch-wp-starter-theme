@@ -21,4 +21,6 @@
 			<?php get_template_part( 'tmp/site-branding' ); ?>
 		</div>
 	</header>
+	<?php get_template_part( 'tmp/menu', 'primary' ); ?>
 	<!-- /header -->
+	<?php get_template_part( 'tmp/hero' ); ?>
