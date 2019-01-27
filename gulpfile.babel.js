@@ -22,8 +22,7 @@ import cleanCss from 'gulp-clean-css';
 import packageImporter from 'node-sass-package-importer';
 
 // js
-import babel from 'gulp-babel';
-import uglify from 'gulp-uglify';
+import webpack from 'webpack-stream';
 
 // clean
 import del from 'del';
@@ -147,8 +146,28 @@ export const scripts = () => {
 		.pipe(
 			plumber({ errorHandler: notify.onError( 'Error: <%= error.message %>' ) })
 		)
-		.pipe( babel() )
-		.pipe( gulpif( PRODUCTION, uglify() ) )
+		.pipe(
+			webpack({
+				module: {
+					rules: [
+						{
+							test: /\.js$/,
+							use: {
+								loader: 'babel-loader',
+								options: {
+									presets: []
+								}
+							}
+						}
+					]
+				},
+				mode: PRODUCTION ? 'production' : 'development',
+				devtool: ! PRODUCTION ? 'inline-source-map' : false,
+				output: {
+					filename: 'bundle.js'
+				}
+			})
+		)
 		.pipe( rename({ suffix: '.min' }) )
 		.pipe( dest( paths.scrips.dest ) );
 };
