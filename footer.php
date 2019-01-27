@@ -10,18 +10,20 @@
 
 ?>
 
-<footer class="p-footer">
+<footer class="fd-section p-footer">
 	<?php if ( is_active_sidebar( 'wp-widgets-footer' ) ) { ?>
 		<section class="fd-section">
 			<?php dynamic_sidebar( 'wp-widgets-footer' ); ?>
 		</section>
 	<?php } ?>
-	<p class="c-copyright"><small>©
-	<?php
-		echo esc_html( date( 'Y' ) );
-		bloginfo( 'name' );
-	?>
-	</small></p>
+	<p class="c-copyright">
+		<small>©
+		<?php
+			echo esc_html( date( 'Y' ) );
+			bloginfo( 'name' );
+		?>
+		</small>
+	</p>
 	<a class="c-pagetop" href="#pagetop">Page Top</a>
 </footer>
 
