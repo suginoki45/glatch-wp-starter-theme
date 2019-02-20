@@ -1,6 +1,108 @@
 @import "~minireset.css/minireset.min.css";
 @import "config/variables";
+@import "foundation/default-styles";
+@import "object/project/header";
+@import "object/component/nav-menu";
 
-.start {
-	color: #333;
+section {
+	margin-top: 3.5rem;
+	text-align: center;
+}
+
+h2 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	font-size: 3rem;
+	line-height: 1.3;
+
+	span {
+		display: block;
+		font-size: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2rem;
+	}
+}
+
+.p-global-navi {
+	position: relative;
+}
+
+.c-toggle {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 9999;
+}
+
+.c-hamburger {
+	position: relative;
+	display: block;
+	width: 50px;
+	height: 43px;
+	cursor: pointer;
+
+	span {
+		display: block;
+		position: absolute;
+		left: 10px;
+		width: 32px;
+		height: 2px;
+		background-color: #212121;
+		transition: all 0.2s ease-out;
+
+		&:nth-of-type(1) {
+			top: 10px;
+		}
+
+		&:nth-of-type(2) {
+			top: 20px;
+		}
+
+		&:nth-of-type(3) {
+			top: 30px;
+		}
+	}
+
+	&.is-active {
+
+		span {
+			background-color: #fff;
+
+			&:nth-of-type(1),
+			&:nth-of-type(3) {
+				width: 29px;
+			}
+
+			&:nth-of-type(1) {
+				transform: rotate(45deg);
+				transform-origin: left top;
+			}
+
+			&:nth-of-type(2) {
+				opacity: 0;
+			}
+
+			&:nth-of-type(3) {
+				transform: rotate(-45deg);
+				transform-origin: left top;
+				left: 9px;
+			}
+		}
+	}
+}
+
+.p-footer {
+	padding: 2rem;
+}
+
+.fd-section {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.c-hero {
+	display: flex;
+	align-items: center;
+	max-height: 400px;
+	overflow: hidden;
 }
