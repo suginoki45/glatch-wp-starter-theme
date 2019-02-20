@@ -89,7 +89,7 @@ export const clean = () => {
 const server = browserSync.create();
 export const serve = done => {
 	server.init({
-		proxy: 'http://glatchwpstarter.test'
+		proxy: 'http://glatchwpstartertheme.test'
 	});
 	done();
 };
