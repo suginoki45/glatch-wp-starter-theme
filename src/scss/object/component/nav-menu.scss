@@ -1,0 +1,38 @@
+.c-nav-menu {
+	$block: &;
+	padding: 10rem 2rem 2rem;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	background-color: #212121;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease-out;
+	will-change: opacity;
+
+	&.is-active {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(0);
+	}
+
+	li {
+		opacity: 0;
+		transform: translateY(2rem);
+	}
+
+	&.is-active li {
+		opacity: 1;
+		transform: translateY(0);
+		transition: all 0.2s ease-out;
+	}
+
+	a {
+		color: #fff;
+		font-size: 2rem;
+		font-weight: 700;
+	}
+}

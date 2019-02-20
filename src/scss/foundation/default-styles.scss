@@ -1,0 +1,22 @@
+html {
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+}
+
+body {
+	-webkit-text-size-adjust: 100%;
+	font-feature-settings: "palt";
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	outline: none;
+	padding: 0;
+	appearance: none;
+}
+
+a {
+	text-decoration: none;
+}
