@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hatch2/_yourthemename.git"
+		"url": "git+https://github.com/suginoki45/_yourthemename.git"
 	},
 	"author": "Glatch",
 	"license": "MIT",
