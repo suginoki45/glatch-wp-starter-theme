@@ -45,6 +45,7 @@
 		"yargs": "^13.2.1"
 	},
 	"dependencies": {
-		"minireset.css": "0.0.4"
+		"minireset.css": "0.0.4",
+		"sass-mq": "^5.0.0"
 	}
 }
