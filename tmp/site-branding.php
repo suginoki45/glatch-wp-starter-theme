@@ -4,7 +4,7 @@
 <p class="c-logo">
 <?php endif; ?>
 
-<a href="/"><img src="" alt=""></a>
+<a href="/"><img src="" alt="<?php bloginfo('name'); ?>のロゴ"></a>
 
 <?php if ( is_home() || is_front_page() ) : ?>
 </h1>

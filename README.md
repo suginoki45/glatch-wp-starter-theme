@@ -1,33 +1,53 @@
-# Glatch WP starter kit
+# Glatch WP starter theme
 
 Starter kit for developing WordPress Theme.
+
+## Reference
+Thanks!
+
+[Gulp for WordPress: Initial Setup](https://css-tricks.com/gulp-for-wordpress-initial-setup/)
 
 ## About
 
 Web 制作ユニット[Glatch](https://glatchdesign.com/)が WordPress テーマ制作に使用しているスターターキットです。
 
 ## Dependencies
+### npm packages
 
-- Gulp v4
-- Sass(SCSS)
-- Babel
 - Autoprefixer
-- PostCSS
+- Babel
 - BrowserSync
+- Gulp v4
+- PostCSS
+- Sass(SCSS)
+- webpack
 
-## Plugins
+### VS Code plugins
+- EditorConfig for VS Code
+- ESLint
+- HTMLHint
+- phpcbf
+- phpcs
+- Prettier
+- stylelint
+- WordPress Snippets
+
+## WordPress Plugins
 
 ### 必須
-- <a href="https://ja.wordpress.org/plugins/wp-multibyte-patch/" target="_blank">WP Multibyte Plugin</a>
+- [WP Multibyte Plugin](https://ja.wordpress.org/plugins/wp-multibyte-patch/)</a>
 
 ### 使用頻度：高
-- <a href="https://wordpress.org/plugins/contact-form-7/" target="_blank">Contact Form 7</a>
-- <a href="https://wordpress.org/plugins/contact-form-7-add-confirm/" target="_blank">Contact Form 7 add confirm</a>
-- <a href="https://ja.wordpress.org/plugins/advanced-custom-fields/" target="_blank">Advanced Custom Fields</a>
-- <a href="https://wordpress.org/plugins/custom-post-type-ui/" target="_blank">Custom Post Type UI</a>
+- [Contact Form 7](https://wordpress.org/plugins/contact-form-7/)</a>
+- [Contact Form 7 add confirm](https://wordpress.org/plugins/contact-form-7-add-confirm/)</a>
+- [Advanced Custom Fields](https://ja.wordpress.org/plugins/advanced-custom-fields/)</a>
+- [Custom Post Type UI](https://wordpress.org/plugins/custom-post-type-ui/)</a>
 
 ### 開発
-- <a href="https://wordpress.org/plugins/custom-post-type-ui/" target="_blank">Show Current Template</a>
-- <a href="https://ja.wordpress.org/plugins/simply-static/" target="_blank">Simply Static</a>
-- <a href="https://ja.wordpress.org/plugins/wp-maintenance-mode/" target="_blank">WP Maintenance Mode</a>
+- [Show Current Template](https://wordpress.org/plugins/custom-post-type-ui/)</a>
+- [Simply Static](https://ja.wordpress.org/plugins/simply-static/)
+- [WP Maintenance Mode](https://ja.wordpress.org/plugins/wp-maintenance-mode/)</a>
 
+## Third party resources
+- Unsplash
+	- [https://unsplash.com/photos/_7cnCk7Rc-s](https://unsplash.com/photos/_7cnCk7Rc-s)
