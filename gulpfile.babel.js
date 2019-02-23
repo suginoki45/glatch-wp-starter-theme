@@ -13,6 +13,12 @@ import zip from 'gulp-zip';
 // image
 import imagemin from 'gulp-imagemin';
 
+// svg sprite
+import path from 'path';
+import svgmin from 'gulp-svgmin';
+import svgstore from 'gulp-svgstore';
+import cheerio from 'gulp-cheerio';
+
 // css
 import sass from 'gulp-sass';
 import postcss from 'gulp-postcss';
@@ -41,6 +47,10 @@ const paths = {
 	images: {
 		src: 'src/images/**/*.{jpg,jpeg,png,svg,gif}',
 		dest: 'dist/images'
+	},
+	svg: {
+		src: 'src/icon/**/*.svg',
+		dest: 'dist/icon'
 	},
 	scrips: {
 		src: 'src/js/bundle.js',
@@ -108,6 +118,41 @@ export const images = () => {
 		)
 		.pipe( gulpif( PRODUCTION, imagemin() ) )
 		.pipe( dest( paths.images.dest ) );
+};
+
+/**
+ * SVG sprite
+ */
+export const svgsprite = () => {
+	return src( paths.svg.src )
+		.pipe(
+			svgmin( file => {
+				const prefix = path.basename(
+					file.relative,
+					path.extname( file.relative )
+				);
+				return {
+					plugins: [
+						{
+							cleanupIDs: {
+								prefix: prefix + '-',
+								minify: true
+							}
+						}
+					]
+				};
+			})
+		)
+		.pipe( svgstore({ inlineSvg: true }) )
+		.pipe(
+			cheerio({
+				run: function( $ ) {
+					$( 'svg' ).attr( 'style', 'display:none' );
+				},
+				parserOptions: { xmlMode: true }
+			})
+		)
+		.pipe( dest( paths.svg.dest ) );
 };
 
 /**
@@ -195,6 +240,7 @@ export const watchForChanges = () => {
 	watch( 'src/js/**/*.js', series( scripts, reload ) );
 	watch( '**/*.php', reload );
 	watch( paths.images.src, series( images, reload ) );
+	watch( paths.svg.src, series( svgsprite, reload ) );
 	watch( paths.other.src, series( copy, reload ) );
 };
 
@@ -203,10 +249,13 @@ export const watchForChanges = () => {
  */
 export const dev = series(
 	clean,
-	parallel( styles, images, copy, scripts ),
+	parallel( styles, images, svgsprite, copy, scripts ),
 	serve,
 	watchForChanges
 );
-export const build = series( clean, parallel( styles, images, copy, scripts ) );
+export const build = series(
+	clean,
+	parallel( styles, images, svgsprite, copy, scripts )
+);
 export const bundle = series( build, compress );
 export default dev;
