@@ -176,7 +176,7 @@ export const styles = () => {
 		)
 		.pipe( gulpif( ! PRODUCTION, sourcemaps.init() ) )
 		.pipe( sass( sassOptions ).on( 'error', sass.logError ) )
-		.pipe( gulpif( PRODUCTION, postcss([ autoprefixer ]) ) )
+		.pipe( gulpif( PRODUCTION, postcss([ autoprefixer({ grid: true }) ]) ) )
 		.pipe( gulpif( PRODUCTION, cleanCss() ) )
 		.pipe( gulpif( ! PRODUCTION, sourcemaps.write() ) )
 		.pipe( dest( paths.styles.dest ) )
