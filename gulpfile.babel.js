@@ -23,7 +23,7 @@ import cheerio from 'gulp-cheerio';
 import sass from 'gulp-sass';
 import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
-import autoprefixer from 'gulp-autoprefixer';
+import autoprefixer from 'autoprefixer';
 import cleanCss from 'gulp-clean-css';
 import packageImporter from 'node-sass-package-importer';
 
