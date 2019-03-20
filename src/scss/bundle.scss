@@ -1,8 +1,7 @@
 @import "~minireset.css/minireset.min.css";
-@import "config/variables";
-@import "foundation/default-styles";
-@import "object/project/header";
-@import "object/component/nav-menu";
+@import "config/*.scss";
+@import "foundation/*.scss";
+@import "object/**/*.scss";
 
 section {
 	margin-top: 3.5rem;

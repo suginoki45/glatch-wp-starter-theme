@@ -25,7 +25,7 @@ import postcss from 'gulp-postcss';
 import sourcemaps from 'gulp-sourcemaps';
 import autoprefixer from 'autoprefixer';
 import cleanCss from 'gulp-clean-css';
-import packageImporter from 'node-sass-package-importer';
+import magicImporter from 'node-sass-magic-importer';
 
 // js
 import webpack from 'webpack-stream';
@@ -85,9 +85,7 @@ const paths = {
 };
 
 const sassOptions = {
-	importer: packageImporter({
-		extensions: [ '.scss', '.css' ]
-	})
+	importer: magicImporter()
 };
 
 // Clean directory
