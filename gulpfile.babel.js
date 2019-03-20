@@ -76,6 +76,8 @@ const paths = {
 			'!gulpfile.babel.js',
 			'!package.json',
 			'!package-lock.json',
+			'!composer.json',
+			'!composer.lock',
 			'!phpcs.xml'
 		],
 		dest: 'packaged'
