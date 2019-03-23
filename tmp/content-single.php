@@ -9,7 +9,7 @@ $category = get_the_category();
 				<a href="<?php echo esc_html( get_category_link( $category[0]->term_id ) ); ?>"><?php echo esc_html( $category[0]->category_nicename ); ?></a>
 			</li>
 			<li class="c-meta__item is-date">
-				<?php the_time( 'Y.m.d' ); ?>
+				<time datetime="<?php the_time( 'Y-m-d' ); ?>"><?php the_time( 'Y.m.d' ); ?></time>
 			</li>
 		</ul>
 		<?php the_title( '<h1 class="c-entry__heading">', '</h1>' ); ?>
