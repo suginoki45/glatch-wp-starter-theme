@@ -8,8 +8,6 @@
  * @since     _yourthemename 1.0.0
  */
 
-$category = get_the_category();
-
 get_header();
 ?>
 <main class="c-main">
