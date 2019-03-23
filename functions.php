@@ -22,6 +22,11 @@ foreach ( $includes as $include ) {
 }
 
 /**
+* Uses composer autoloader
+*/
+require_once get_template_directory() . '/vendor/autoload.php';
+
+/**
  *  Theme definitions.
  */
 define( '_YOURTHEMENAME_VER', '0.0.0' );
