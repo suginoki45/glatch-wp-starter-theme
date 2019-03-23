@@ -1,1 +1,64 @@
-$main-colors: #ff0000;
+// Fonts
+$base-font-family: "游ゴシック体", yugothic, "游ゴシック", "Yu Gothic",
+	"メイリオ", sans-serif;
+$heading-font-family: "Barlow", sans-serif;
+$base-line-height: 1.75;
+
+// Colors
+$black: #3c3c3c !default;
+$gray: #f4f6f8 !default;
+$white: #fff !default;
+$red: #ca4e87 !default;
+$indigo: #102641 !default;
+$emerald: #4ecac2 !default;
+
+$primary: $indigo !default;
+$secondary: $emerald !default;
+$danger: $red !default;
+
+$theme-colors: () !default;
+
+$theme-colors: map-merge((
+	"primary": $primary,
+	"secondary": $secondary,
+	"danger": $danger
+), $theme-colors);
+
+// Links
+$link-color: darken($secondary, 10%);
+
+// Media Queries
+// Using Media Query Library "sass-mq".
+// https://github.com/sass-mq/sass-mq
+
+$mq-breakpoints: (
+	mobile: 500px,
+	tablet: 700px,
+	desktop: 1000px,
+	wide: 1040px,
+	extra: 1350px
+);
+
+// Containers
+$section-width: 1024px;
+$section-width-wide: 1200px;
+$section-width-narrow: 768px;
+
+$section-widths: (
+	basic: $section-width,
+	wide: $section-width-wide,
+	narrow: $section-width-narrow
+);
+
+// Gutters
+$section-gutter-mobile: 24px;
+$section-gutter-tablet: 40px;
+$section-gutter-desktop: 48px;
+$section-gutter-wide: 24px;
+
+$section-gutters: (
+	mobile: $section-gutter-mobile,
+	tablet: $section-gutter-tablet,
+	desktop: $section-gutter-desktop,
+	wide: $section-gutter-wide
+);
