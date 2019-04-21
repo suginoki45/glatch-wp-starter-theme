@@ -1,0 +1,22 @@
+// Setting section gutters.
+@each $device, $gutter-width in $section-gutters {
+
+	.c-section {
+
+		.inner {
+
+			@if $device == mobile {
+				padding-left: $gutter-width;
+				padding-right: $gutter-width;
+			} @else {
+
+				@include mq($from: map-get($mq-breakpoints, $device)) {
+					max-width: $section-width + $gutter-width * 2;
+					margin: 0 auto;
+					padding-left: $gutter-width;
+					padding-right: $gutter-width;
+				}
+			}
+		}
+	}
+}
