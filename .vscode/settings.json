@@ -16,12 +16,6 @@
     "editor.formatOnSave": false
 	},
 
-	// prettierとぶつかり合うのでデフォルトの整形は無効にする
-	"javascript.format.enable": false,
-
-	// prettierでeslintを使用できるようにする
-	"prettier.eslintIntegration": true,
-
 	// WordPress Coding Standard準拠の設定
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
@@ -32,7 +26,4 @@
   "phpcbf.standard": "WordPress",
   "phpcbf.executablePath": "~/.composer/vendor/bin/phpcbf",
 	"phpcbf.onsave": true,
-
-	// ESLintの設定
-	"eslint.autoFixOnSave": true,
 }
