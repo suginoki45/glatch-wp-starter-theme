@@ -1,0 +1,7 @@
+// Retrieve color Sass maps
+// Reffernce from bootstrap.
+// @link https://github.com/twbs/bootstrap/blob/master/scss/_functions.scss
+@function theme-color($key: "primary") {
+
+	@return map-get($theme-colors, $key);
+}
