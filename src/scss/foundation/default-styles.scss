@@ -20,3 +20,45 @@ button {
 a {
 	text-decoration: none;
 }
+
+// WordPress default generate class styles.
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.aligncenter {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	clear: both;
+}
+
+.alignfull {
+}
+
+.alignwide {
+}
+
+.bypostauthor {
+}
+
+.gallery {
+
+	&-item {
+	}
+
+	&-caption {
+	}
+}
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
