@@ -5,7 +5,8 @@
 		"node": true,
 		"browser": true
 	},
-	"extends": "wordpress",
+	"extends": ["wordpress", "plugin:prettier/recommended"],
+	"plugins": ["babel-eslint"],
 	"parserOptions": {
 		"sourceType": "module"
 	}
