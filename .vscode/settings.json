@@ -20,10 +20,10 @@
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
 	"files.eol": "\n",
-	"phpcs.standard": "./phpcs.xml",
+	"phpcs.standard": "WordPress",
 
 	// phpcbfの設定
   "phpcbf.standard": "WordPress",
-  "phpcbf.executablePath": "~/.composer/vendor/bin/phpcbf",
+  "phpcbf.executablePath": "./vendor/bin/phpcbf",
 	"phpcbf.onsave": true,
 }
