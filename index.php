@@ -17,7 +17,7 @@ get_header();
 		<div class="c-section__inner">
 		<?php
 		$args      = array(
-			'posts_per_page'   => 3,
+			'posts_per_page' => 3,
 		);
 		$the_query = new WP_Query( $args );
 		?>
