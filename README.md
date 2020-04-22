@@ -2,6 +2,17 @@
 
 Starter kit for developing WordPress Theme.
 
+## How to use
+```
+npm install
+```
+```
+composer install
+```
+```
+npm start
+```
+
 ## Reference
 Thanks!
 
