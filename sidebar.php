@@ -10,6 +10,6 @@
 
 ?>
 
-<aside class="fd-section">
+<aside class="c-section">
 	<?php dynamic_sidebar( 'wp-widgets-sidebar' ); ?>
 </aside>

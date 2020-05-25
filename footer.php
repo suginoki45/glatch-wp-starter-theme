@@ -10,9 +10,9 @@
 
 ?>
 
-<footer class="fd-section p-footer">
+<footer class="c-section p-footer">
 	<?php if ( is_active_sidebar( 'wp-widgets-footer' ) ) { ?>
-		<section class="fd-section">
+		<section class="c-section">
 			<?php dynamic_sidebar( 'wp-widgets-footer' ); ?>
 		</section>
 	<?php } ?>
