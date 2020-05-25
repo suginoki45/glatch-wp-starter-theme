@@ -10,7 +10,7 @@
     "editor.formatOnSave": false
   },
   "[javascript]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": false
   },
   "[php]": {
     "editor.formatOnSave": false
@@ -26,4 +26,8 @@
   "phpcbf.standard": "WordPress",
   "phpcbf.executablePath": "./vendor/bin/phpcbf",
 	"phpcbf.onsave": true,
+	"javascript.format.enable": false,
+	"typescript.format.enable": false,
+	"vetur.format.enable": false,
+	"eslint.format.enable": true,
 }
