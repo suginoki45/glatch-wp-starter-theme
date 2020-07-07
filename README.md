@@ -3,12 +3,17 @@
 Starter kit for developing WordPress Theme.
 
 ## How to use
+### STEP1
 ```
 npm install
 ```
+
+### STEP2
 ```
 composer install
 ```
+
+### STEP3
 ```
 npm start
 ```
@@ -25,13 +30,7 @@ Web 制作ユニット[Glatch](https://glatchdesign.com/)が WordPress テーマ
 ## Dependencies
 ### npm packages
 
-- Autoprefixer
-- Babel
-- BrowserSync
-- Gulp v4
-- PostCSS
-- Sass(SCSS)
-- webpack
+package.jsonを参照
 
 ### VS Code plugins
 - EditorConfig for VS Code
