@@ -12,7 +12,6 @@ if ( ! function_exists( '_yourthemename_assets' ) ) {
 	 */
 	function _yourthemename_assets() {
 		if ( ! is_admin() ) {
-			wp_enqueue_style( 'fontawesome-style', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css', array(), _YOURTHEMENAME_VER );
 			wp_enqueue_style( '_yourthemename-style', get_theme_file_uri( '/dist/css/bundle.css' ), array(), _YOURTHEMENAME_VER );
 
 			wp_deregister_script( 'jquery' );
