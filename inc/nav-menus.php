@@ -3,8 +3,7 @@
  * Register navigation menus
  *
  * @package _yourthemename
- * @since 1.0.0
- * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
+ * @author  Glatch
  */
 
 register_nav_menus(

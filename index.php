@@ -1,44 +1,33 @@
 <?php
 /**
- * The Index Page template.
+ * The index page template
  *
- * @package   _yourthemename
- * @copyright Copyright (c) 2018 Glatch
- * @license   GNU General Public License v2.0
- * @since     _yourthemename 1.0.0
+ * @package _yourthemename
+ * @author  Glatch
  */
 
 get_header();
 
 ?>
 
-<main>
-	<section class="c-section">
-		<div class="c-section__inner">
-		<?php
-		$args      = array(
-			'posts_per_page' => 3,
-		);
-		$the_query = new WP_Query( $args );
+<section class="c-section">
+	<div class="c-section__inner">
+	<?php
+	if ( have_posts() ) :
 		?>
-		<?php
-		if ( $the_query->have_posts() ) {
-			?>
 		<ul class="c-card is-column3">
 			<?php
-			while ( $the_query->have_posts() ) {
-				$the_query->the_post();
+			while ( have_posts() ) :
+				the_post();
 				get_template_part( 'tmp/card' );
-			}
+			endwhile;
 			?>
 		</ul>
-			<?php
-			wp_reset_postdata();
-		}
-		?>
-		</div>
-	</section>
-</main>
+		<?php
+	endif;
+	?>
+	</div>
+</section>
 
 <?php
 get_footer();

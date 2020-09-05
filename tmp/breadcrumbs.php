@@ -1,7 +1,15 @@
 <?php
+/**
+ * The breadcrumbs template
+ *
+ * @package _yourthemename
+ * @author  Glatch
+ */
+
 $breadcrumbs = new Inc2734\WP_Breadcrumbs\Breadcrumbs();
 $items       = $breadcrumbs->get();
 ?>
+
 <div class="c-section c-breadcrumbs">
 	<div class="inner">
 		<ol class="c-breadcrumbs__list" itemscope itemtype="http://schema.org/BreadcrumbList">

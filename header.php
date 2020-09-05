@@ -1,10 +1,9 @@
 <?php
 /**
- * The Header template.
+ * Template for displaying the header
  *
- * @package   _yourthemename
- * @copyright Copyright (c) 2018 Glatch
- * @since     _yourthemename 1.0
+ * @package _yourthemename
+ * @author  Glatch
  */
 
 ?>
@@ -16,6 +15,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+	<?php wp_body_open(); ?>
 	<header class="c-section p-header">
 		<div class="l-header">
 			<?php get_template_part( 'tmp/site-branding' ); ?>
@@ -24,3 +24,5 @@
 	<?php get_template_part( 'tmp/menu', 'primary' ); ?>
 	<!-- /header -->
 	<?php get_template_part( 'tmp/hero' ); ?>
+
+	<main>

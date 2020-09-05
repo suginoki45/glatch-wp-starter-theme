@@ -3,7 +3,7 @@
  * Functions for sanitize.
  *
  * @package _yourthemename
- * @since 1.0.0
+ * @author  Glatch
  */
 
 /**

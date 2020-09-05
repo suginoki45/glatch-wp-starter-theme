@@ -1,14 +1,14 @@
 <?php
 /**
- * The Footer template.
+ * Template for displaying the footer
  *
- * @package   _yourthemename
- * @copyright Copyright (c) 2018 Glatch
- * @license   GNU General Public License v2.0
- * @since     drip 1.0.0
+ * @package _yourthemename
+ * @author  Glatch
  */
 
 ?>
+
+</main>
 
 <footer class="c-section p-footer">
 	<?php if ( is_active_sidebar( 'wp-widgets-footer' ) ) { ?>
@@ -19,7 +19,7 @@
 	<p class="c-copyright">
 		<small>©
 		<?php
-			echo esc_html( date( 'Y' ) );
+			echo esc_html( gmdate( 'Y' ) );
 			bloginfo( 'name' );
 		?>
 		</small>

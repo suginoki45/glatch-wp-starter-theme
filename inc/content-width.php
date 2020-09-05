@@ -1,4 +1,10 @@
 <?php
+/**
+ * Function to set up content width
+ *
+ * @package _yourthemename
+ * @author  Glatch
+ */
 
 if ( ! function_exists( '_yourthemename_content_width' ) ) {
 	/**

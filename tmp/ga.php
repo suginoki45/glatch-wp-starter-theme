@@ -1,9 +1,9 @@
 <?php
 /**
- * Template for Google Analytics.
+ * Template for Google Analytics settings
  *
- * @package   _yourthemename
- * @since     1.0.0
+ * @package _yourthemename
+ * @author  Glatch
  */
 
 ?>

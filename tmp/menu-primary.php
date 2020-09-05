@@ -1,3 +1,13 @@
+<?php
+/**
+ * The menu-primary template
+ *
+ * @package _yourthemename
+ * @author  Glatch
+ */
+
+?>
+
 <div class="c-toggle">
 	<button type="button" class="c-hamburger" id="js-hamburger">
 		<span></span>

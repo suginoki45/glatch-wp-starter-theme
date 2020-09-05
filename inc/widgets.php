@@ -1,12 +1,17 @@
 <?php
 /**
+ * Register widget area
+ *
+ * @package _yourthemename
+ * @author  Glatch
+ */
+
+/**
  * Register widget area.
  *
  * @package _yourthemename
- * @since 1.0.0
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ * @author  Glatch
  */
-
 function _yourthemename_widgets_init() {
 	$config = array(
 		'description'   => esc_html__( 'Add widgets here.', '_yourthemename' ),

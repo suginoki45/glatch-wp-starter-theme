@@ -1,4 +1,11 @@
 <?php
+/**
+ * The content single template
+ *
+ * @package _yourthemename
+ * @author  Glatch
+ */
+
 $category = get_the_category();
 ?>
 
@@ -24,7 +31,7 @@ $category = get_the_category();
 		} else {
 			?>
 			<div class="c-entry__thumbnail">
-				<img src="<?php get_url_with_update_query( '/dist/images/img_degault-thumbnail.png' ); ?>" alt="デフォルトのサムネイル">
+				<img src="<?php echo esc_url( get_theme_file_uri( '/dist/images/img_degault-thumbnail.png' ) ); ?>" alt="デフォルトのサムネイル">
 			</div>
 			<?php
 		}
