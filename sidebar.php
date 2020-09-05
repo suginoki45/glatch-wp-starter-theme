@@ -1,11 +1,9 @@
 <?php
 /**
- * The Sidebar template.
+ * The sidebar template.
  *
- * @package   _yourthemename
- * @copyright Copyright (c) 2018 Glatch
- * @license   GNU General Public License v2.0
- * @since     drip 1.0.0
+ * @package _yourthemename
+ * @author  Glatch
  */
 
 ?>
