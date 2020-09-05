@@ -20,7 +20,6 @@ $category = get_the_category();
 			</li>
 		</ul>
 		<?php the_title( '<h1 class="c-entry__heading">', '</h1>' ); ?>
-		<?php get_template_part( 'tmp/share-buttons' ); ?>
 		<?php
 		if ( has_post_thumbnail() ) {
 			?>
@@ -39,11 +38,5 @@ $category = get_the_category();
 		<div class="c-entry__content">
 			<?php the_content(); ?>
 		</div>
-		<footer class="c-entry__footer">
-			<div class="c-entry__share-buttons">
-				<p class="c-entry__share-buttons__label">share:</p>
-				<?php get_template_part( 'tmp/share-buttons' ); ?>
-			</div>
-		</footer>
 	</div>
 </article>

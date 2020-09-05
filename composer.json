@@ -1,7 +1,6 @@
 {
 	"require": {
-		"inc2734/wp-breadcrumbs": "^1.0",
-		"inc2734/wp-share-buttons": "^4.0"
+		"inc2734/wp-breadcrumbs": "^1.0"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "^3.5",
