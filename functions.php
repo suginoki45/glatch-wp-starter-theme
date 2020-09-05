@@ -2,10 +2,8 @@
 /**
  * _yourthemename functions and definitions.
  *
- * @package   _yourthemename
- * @copyright Copyright (c) 2018 Glatch
- * @license   GNU General Public License v2.0
- * @since     1.0.0
+ * @package _yourthemename
+ * @author  Glatch
  */
 
 /**
@@ -22,7 +20,7 @@ foreach ( $includes as $include ) {
 }
 
 /**
-* Uses composer autoloader
+* Uses composer autoloader.
 */
 require_once get_template_directory() . '/vendor/autoload.php';
 
