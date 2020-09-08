@@ -19,7 +19,7 @@ get_header();
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				get_template_part( 'tmp/card' );
+				get_template_part( 'template-parts/card' );
 			endwhile;
 			?>
 		</ul>
